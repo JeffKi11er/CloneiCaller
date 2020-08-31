@@ -77,7 +77,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:id="@+id/layout_otp"
-        android:visibility="visible"
+        android:visibility="invisible"
         android:orientation="horizontal">
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"

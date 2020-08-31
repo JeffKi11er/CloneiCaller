@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/colorWhite">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/bg_end_call_not_spam"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:weightSum="4">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3">
+
+            <TextView
+                android:id="@+id/tvNameAfterCall4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/phone_number"
+                android:textColor="@color/colorWhite"
+                android:textSize="24dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvPhoneNumberAfterCall4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvNameAfterCall4"
+                android:text="@string/delete_vie"
+                android:textColor="@color/colorWhite"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/tvCountryAfterCall4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvPhoneNumberAfterCall4"
+                android:layout_marginTop="16dp"
+                android:text="@string/message"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/tvNetworkAfterCall4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvCountryAfterCall4"
+                android:text="@string/cancel_vie"
+                android:textColor="@color/colorDarkGray"
+                android:textSize="16dp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgCloseAfterCall4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_close" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvCallReceivedAfterCall4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Bạn trả lời cuộc gọi này 2 lần"
+            android:textColor="@color/colorDarkGray"
+            android:textSize="16dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/ic_arrow_right_down_purple" />
+
+            <TextView
+                android:id="@+id/tvContentAfterCall4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/content_after_call_2"
+                android:textColor="@color/colorBlack"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+        <Button
+            android:layout_margin="16dp"
+            android:layout_marginTop="8dp"
+            android:id="@+id/btnCorrectAfterCall4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/setting_button"
+            android:text="@string/tell_us_who_this_is_vie"
+            android:textColor="@color/colorWhite" />
+    </LinearLayout>
+
+</LinearLayout>

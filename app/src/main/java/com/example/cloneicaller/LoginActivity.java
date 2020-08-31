@@ -3,6 +3,9 @@ package com.example.cloneicaller;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,11 +17,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.cloneicaller.Models.Members;
+import com.example.cloneicaller.auth.RetrofitClient;
+import com.example.cloneicaller.databinding.ActivityLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.i18n.phonenumbers.NumberParseException;
@@ -27,46 +34,39 @@ import com.google.i18n.phonenumbers.Phonenumber;
 
 import java.util.concurrent.TimeUnit;
 
-public class LoginActivity extends AppCompatActivity {
-    Button btn_login;
-    LinearLayout layout_otp;
-    private EditText edt1,edt2,edt3,edt4,edt5,edt6, edtphoneNumber;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class LoginActivity extends AppCompatActivity implements Callback<Members> {
+
+    ActivityLoginBinding binding;
     String verifyCodeBySystem;
+    String codeOtp;
+    String phoneNum = "+84965999999";
+
+    private String g_token = "eyJhbGciOiJSUzI1NiIsImtpZCI6IjZjZmMyMzViZDYxMGZhY2FlYzVlYjBhZGU5NTg5ZGE5NTI4MmRlY2QiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vaWNhbGxlci04YzM3MiIsImF1ZCI6ImljYWxsZXItOGMzNzIiLCJhdXRoX3RpbWUiOjE1OTU4MTUzMDAsInVzZXJfaWQiOiIxclc2ZjBuZ2RSWk5nd3dGRG1ONWNvaVdSSTkzIiwic3ViIjoiMXJXNmYwbmdkUlpOZ3d3RkRtTjVjb2lXUkk5MyIsImlhdCI6MTU5NTgxNTMwMiwiZXhwIjoxNTk1ODE4OTAyLCJwaG9uZV9udW1iZXIiOiIrODQ5NjU5OTk5OTkiLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7InBob25lIjpbIis4NDk2NTk5OTk5OSJdfSwic2lnbl9pbl9wcm92aWRlciI6InBob25lIn19.eVn386uJEZ6skWDRKqwxk-6su46IchXF24Vk0gQ5V5unjtD_0nDtMmG5K7hwv824E5VuCqoq2ZByyRsugQB5D9BkoEKSH-OlmuAt2YY8yAIFuv5lMslT9o4FX6tJxgsqwBBNB637iVK5iRpQThMyg6Omd8Kdh0EALS4mvBJUugoPaC5T4d006QpwAblAO4csrK7dtnoXSE3nfbqXT1huIrhVnyGMCXghFs1lOebPmR2hNMfBfoXo0uM52ET7NvM6h4fMCTlECzjGQPEh0dzFdbcVhUTBzb9OYaJOTdwGZP2sSX5PedBKlMNHmSiYUezzP4FKih-AFnZAWrzDXrenkA";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        btn_login = findViewById(R.id.btn_login);
-        layout_otp = findViewById(R.id.layout_otp);
 
-        edt1 = (EditText) findViewById(R.id.edt1);
-        edt2 = (EditText) findViewById(R.id.edt2);
-        edt3 = (EditText) findViewById(R.id.edt3);
-        edt4 = (EditText) findViewById(R.id.edt4);
-        edt5 = (EditText) findViewById(R.id.edt5);
-        edt6 = (EditText) findViewById(R.id.edt6);
-        edtphoneNumber = findViewById(R.id.edtphoneNumber);
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
 
-        final String phoneNumber = edtphoneNumber.getText().toString();
-
-        PhoneNumberUtil phoneNumberUtil = PhoneNumberUtil.getInstance();
-        try {
-            Phonenumber.PhoneNumber phoneNumberVN1  = phoneNumberUtil.parse(phoneNumber, "VN");
-        } catch (NumberParseException e) {
-            e.printStackTrace();
-        }
+        final String phoneNumber = binding.edtphoneNumber.getText().toString();
 
 
-        btn_login.setOnClickListener(new View.OnClickListener() {
+        binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                layout_otp.setVisibility(view.getVisibility());
+                binding.layoutOtp.setVisibility(view.getVisibility());
                 sendOTPToUser(phoneNumber);
             }
         });
 
-        edt1.addTextChangedListener(new TextWatcher() {
+        binding.edt1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -79,13 +79,13 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (editable.toString().length() == 1){
-                    edt2.requestFocus();
+                if (editable.toString().length() == 1) {
+                    binding.edt2.requestFocus();
                 }
             }
         });
 
-        edt2.addTextChangedListener(new TextWatcher() {
+        binding.edt2.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -98,15 +98,15 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (editable.toString().length() == 1){
-                    edt3.requestFocus();
-                }else if (editable.toString().length() == 0){
-                    edt1.requestFocus();
+                if (editable.toString().length() == 1) {
+                    binding.edt3.requestFocus();
+                } else if (editable.toString().length() == 0) {
+                    binding.edt1.requestFocus();
                 }
             }
         });
 
-        edt3.addTextChangedListener(new TextWatcher() {
+        binding.edt3.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -119,15 +119,15 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (editable.toString().length() == 1){
-                    edt4.requestFocus();
-                }else if (editable.toString().length() == 0){
-                    edt2.requestFocus();
+                if (editable.toString().length() == 1) {
+                    binding.edt4.requestFocus();
+                } else if (editable.toString().length() == 0) {
+                    binding.edt2.requestFocus();
                 }
             }
         });
 
-        edt4.addTextChangedListener(new TextWatcher() {
+        binding.edt4.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -140,15 +140,15 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (editable.toString().length() == 1){
-                    edt5.requestFocus();
-                }else if (editable.toString().length() == 0){
-                    edt3.requestFocus();
+                if (editable.toString().length() == 1) {
+                    binding.edt5.requestFocus();
+                } else if (editable.toString().length() == 0) {
+                    binding.edt3.requestFocus();
                 }
             }
         });
 
-        edt5.addTextChangedListener(new TextWatcher() {
+        binding.edt5.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -161,15 +161,15 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (editable.toString().length() == 1){
-                    edt6.requestFocus();
-                }else if (editable.toString().length() == 0){
-                    edt4.requestFocus();
+                if (editable.toString().length() == 1) {
+                    binding.edt6.requestFocus();
+                } else if (editable.toString().length() == 0) {
+                    binding.edt4.requestFocus();
                 }
             }
         });
 
-        edt6.addTextChangedListener(new TextWatcher() {
+        binding.edt6.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -182,19 +182,25 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (editable.toString().length() == 1){
-
-                }else if (editable.toString().length() == 0){
-                    edt5.requestFocus();
+                if (editable.toString().length() == 1) {
+                    try {
+                        codeOtp = binding.edt1.getText().toString() + binding.edt2.getText().toString() + binding.edt3.getText().toString() + binding.edt4.getText().toString() + binding.edt5.getText().toString() + binding.edt6.getText().toString();
+                        verifyCode(codeOtp);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else if (editable.toString().length() == 0) {
+                    binding.edt5.requestFocus();
                 }
             }
         });
+
 
     }
 
-    private void sendOTPToUser(String phoneNumber){
+    private void sendOTPToUser(String phoneNumber) {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                "+84382480081",        // Phone number to verify
+                "+84382480082",        // Phone number to verify
                 60,                 // Timeout duration
                 TimeUnit.SECONDS,   // Unit of timeout
                 this,               // Activity (for callback binding)
@@ -204,12 +210,12 @@ public class LoginActivity extends AppCompatActivity {
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         @Override
         public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
-            Log.e("Success","Thành công");
+            Log.e("Success", "Thành công");
         }
 
         @Override
         public void onVerificationFailed(FirebaseException e) {
-            Log.e("Failed",e.getMessage());
+            Log.e("Failed", e.getMessage());
         }
 
         @Override
@@ -219,8 +225,8 @@ public class LoginActivity extends AppCompatActivity {
         }
     };
 
-    private void verifyCode(String codeByUser){
-        PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.getCredential(verifyCodeBySystem,codeByUser);
+    private void verifyCode(String codeByUser) {
+        PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.getCredential(verifyCodeBySystem, codeByUser);
         signInUserByCredential(phoneAuthCredential);
     }
 
@@ -229,14 +235,47 @@ public class LoginActivity extends AppCompatActivity {
         firebaseAuth.signInWithCredential(phoneAuthCredential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
-                    Toast.makeText(LoginActivity.this,"Successfull",Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Toast.makeText(LoginActivity.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                try {
+                    if (task.isSuccessful()) {
+                        Log.e("checkOTP", "true OTP");
+//                       task.getResult().getUser().getIdToken(true).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+//                           @Override
+//                           public void onComplete(@NonNull Task<GetTokenResult> task) {
+//                               Log.e("AAAA", task.getResult().getToken());
+//                               int a  =1;
+//
+//                           }
+//                       });
+
+                        RetrofitClient.getInstance().getMember(phoneNum, g_token).enqueue(LoginActivity.this);
+
+                    } else {
+                        Log.e("checkOTP", "false OTP");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         });
     }
 
+    @Override
+    public void onResponse(Call<Members> call, Response<Members> response) {
+        if (response.isSuccessful()) {
+            Log.e("Auth", "Valid");
+            SharedPreferences sharedPreferences = getSharedPreferences("token", Context.MODE_PRIVATE);
+            SharedPreferences.Editor spE = sharedPreferences.edit();
+            spE.putString("g_token", g_token);
+            spE.commit();
+
+            startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+        } else {
+            Log.e("Auth", "Invalid");
+        }
+    }
+
+    @Override
+    public void onFailure(Call<Members> call, Throwable t) {
+        Log.e("Auth", t.getMessage());
+    }
 }

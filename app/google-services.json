@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "78920661148-u68qp8h905rh0idbahfeqs25onl6rou5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cloneicaller",
+            "certificate_hash": "6054e99b24c87684e851316180ded38c88cabf91"
+          }
+        },
+        {
           "client_id": "78920661148-vfclvbdjho0kn29kd9li15ka1q453fp4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

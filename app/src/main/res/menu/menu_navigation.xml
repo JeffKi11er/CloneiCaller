@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_keyboard"
+        android:icon="@drawable/ic_pad"
+        android:title="Keyboard"/>
+    <item
+        android:id="@+id/menu_history"
+        android:icon="@drawable/ic_history"
+        android:title="History"/>
+    <item
+        android:id="@+id/menu_block"
+        android:icon="@drawable/ic_blocking"
+        android:title="List"/>
+    <item
+        android:id="@+id/menu_setting"
+        android:icon="@drawable/ic_setting"
+        android:title="Setting"/>
+</menu>

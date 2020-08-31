@@ -1,0 +1,50 @@
+[
+    {
+        "question": "Ứng dụng iCaller là gì?",
+        "answer": "Hiển thị danh tính người gọi:\n\nGiúp người nghe biết ai gọi mình để chủ động quyết định có nghe không.\n\nChặn cuộc gọi quảng cáo, lừa đảo:\nGiúp người dùng tránh bị làm phiền bằng cách chủ động chặn các cuộc gọi quảng cáo, lừa đảo.\n\n*Người dùng cần thiết lập iCaller trở thành ứng dụng mặc định để bật được tính năng này."
+    },
+    {
+        "question": "Ai có thể sử dụng app iCaller",
+        "answer": "Tất cả người dung cài đặt app iCaller."
+    },
+    {
+        "question": "Làm thế nào để đăng ký dịch vụ iCaller",
+        "answer": "Người dùng cần cài đặt app iCaller và thiết lập cấu hình theo hướng dẫn là có thể sử dụng ứng dụng."
+    },
+    {
+        "question": "Các bước cài đặt và cấu hình để sử dụng đầy đủ tính năng ứng dụng iCaller?",
+        "answer": "Để có thể sử dụng đầy đủ tính năng của ứng dụng, người dùng cần hoàn thiện các bước cài đặt cho ứng dụng như sau:\n• Sau khi tải xong và khởi động ứng dụng > đồng ý cho với yêu cầu truy cập danh bạ của ứng dụng.\n• Để hiển thị danh bạ máy, vào mục Cài đặt > kéo xuống chọn ứng dụng iCaller > mục danh bạ bật cho phép truy cập danh bạ.\n• Để hiển thị thông tin người gọi tới, bạn cần cho phép ứng dụng iCaller bật tính năng Hiển thị trên ứng dụng khác."
+    },
+    {
+        "question": "Vì sao màn hình ứng dụng trên máy tôi không hiển thị tên người gọi tới?",
+        "answer": "Sau khi tải xong và khởi động ứng dụng > đồng ý cho với yêu cầu truy cập danh bạ của ứng dụng. Tiếp đó bạn cần cho phép ứng dụng iCaller bật tính năng Hiển thị trên ứng dụng khác để có thể hiển thị tên người gọi.\nNgoài ra, dù luôn cố gắng, trong nhiều trường hợp, iCaller không có thông tin của người gọi. Trong trường hợp này, iCaller chỉ hiển thị số gọi tới."
+    },
+    {
+        "question": "Ứng dụng iCaller hỗ trợ các hệ điều hành nào?",
+        "answer": "Ứng dụng iCaller thích hợp với các thiết bị sử dụng hệ điều hành android 6.0 trở lên và từ 10.0 trở lên đối với các thiết bị IOS."
+    },
+    {
+        "question": "Tôi có lợi ích gì khi sử dụng dịch vụ iCaller?",
+        "answer": "Dịch vụ iCaller bảo vệ người dùng từ các cuộc gọi quảng cáo, lừa đảo bằng cách cung cấp danh tính người gọi cũng như chủ động chặn cuộc gọi từ các số đã được báo cáo là số lừa đảo."
+    },
+    {
+        "question": "Tôi có thể tải ứng dụng iCaller ở đâu?",
+        "answer": "Bạn có thể tải ứng dụng iCaller từ kho ứng dụng Google Play hoặc Apple Store."
+    },
+    {
+        "question": "Làm sao có thể truy cập ứng dụng iCaller",
+        "answer": "Người dùng cần cài đặt app iCaller và thiết lập cấu hình theo hướng dẫn là có thể sử dụng ứng dụng."
+    },
+    {
+        "question": "Vì sao ứng dụng iCaller không hiển thị được danh bạ trên máy của tôi?",
+        "answer": "Để ứng dụng hiển thị được danh bạ trên máy, bạn cần cài đặt cho phép ứng dụng truy cập danh bạ theo hướng dẫn:\n• Đối với iPhone vào mục Cài đặt > kéo xuống chọn ứng dụng iCaller > mục danh bạ bật cho phép truy cập danh bạ\n• Đối với điện thoại Android : vào mục cài đặt > chọn quản lý ứng dụng > chọn ứng dụng iCaller > click mục các quyền của ứng dụng > chọn bật danh bạ và điện thoại."
+    },
+    {
+        "question": "Tôi sử dụng điện thoại 2 sim, làm sao lựa chọn đúng sim iCaller để gọi cho đồng nghiệp?",
+        "answer": "Có 2 cách (chọn sim sử dụng iCaller là sim mặc định)\n• Cài đặt > di động > đường dây thoại mặc định > chọn sim iCaller ( Tiếng Việt ).\n  Settings > mobile data >default voice line> chọn sim iCaller ( Tiếng Anh )\n• Mở ứng dụng gọi điện của iphone > bấm số cần gọi > chọn sim iCaller để thực hiện cuộc gọi."
+    },
+    {
+        "question": "Tôi cần phải có internet mới có thể sử dụng được ứng dụng đúng hay không?",
+        "answer": "Ứng dụng không yêu cầu kết nối internet 100% thời gian, tuy nhiên cần thường xuyên có kết nối internet để cập nhật danh sách số spam mới nhất."
+    }
+]

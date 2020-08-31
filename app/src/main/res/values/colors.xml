@@ -2,9 +2,16 @@
 <resources>
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorAccent">#4B0082</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorPurple">#6C3483</color>
     <color name="colorPurpleBG">#4B0082</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorGray">#DFDEDE</color>
+    <color name="colorRed">#DA2006</color>
+    <color name="colorLavender">#f2d9f6</color>
+    <color name="colorDarkGray">#919090</color>
+    <color name="colorDarkLateBlue">#42437a</color>
+    <color name="colorHideSlide">#61000000</color>
+    <color name="colorFireBrick">#a90939</color>
 </resources>
